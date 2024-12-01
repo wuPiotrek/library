@@ -12,8 +12,9 @@ public class FileManagerBuilder {
         this.printer = printer;
         this.reader = reader;
     }
+
     public FileManager build() {
-        printer.printLine("Wybierz format danych");
+        printer.printLine("Wybierz format danych:");
         FileType fileType = getFileType();
         switch (fileType) {
             case SERIAL:
@@ -36,6 +37,7 @@ public class FileManagerBuilder {
                 printer.printLine("Nieobsługiwany typ danych, wybierz ponownie.");
             }
         } while (!typeOk);
+
         return result;
     }
 
