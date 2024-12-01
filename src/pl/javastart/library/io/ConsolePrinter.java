@@ -9,7 +9,7 @@ public class ConsolePrinter {
         int counter = 0;
         for (Publication publication : publications) {
             if(publication instanceof Book) {
-                printLine(publication.toString());
+                printLineAsIs(publication.toString());
                 counter++;
             }
         }
@@ -21,7 +21,7 @@ public class ConsolePrinter {
         int counter = 0;
         for (Publication publication : publications) {
             if(publication instanceof Magazine) {
-                printLine(publication.toString());
+                printLineAsIs(publication.toString());
                 counter++;
             }
         }
@@ -30,6 +30,10 @@ public class ConsolePrinter {
     }
 
     public void printLine(String text) {
+        System.out.println(text.toUpperCase());
+    }
+
+    private void printLineAsIs(String text) {
         System.out.println(text);
     }
 }
