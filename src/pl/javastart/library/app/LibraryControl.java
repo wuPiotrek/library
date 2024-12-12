@@ -5,10 +5,11 @@ import pl.javastart.library.io.ConsolePrinter;
 import pl.javastart.library.io.DataReader;
 import pl.javastart.library.io.file.FileManager;
 import pl.javastart.library.io.file.FileManagerBuilder;
-import pl.javastart.library.model.*;
-import pl.javastart.library.model.comparator.AlphabeticalTitleComparator;
+import pl.javastart.library.model.Book;
+import pl.javastart.library.model.Library;
+import pl.javastart.library.model.LibraryUser;
+import pl.javastart.library.model.Magazine;
 
-import java.util.Comparator;
 import java.util.InputMismatchException;
 
 class LibraryControl {
@@ -71,12 +72,9 @@ class LibraryControl {
     }
 
     private void printUsers() {
-        printer.printUsers(library.getSortedUsers(new Comparator<LibraryUser>() {
-            @Override
-            public int compare(LibraryUser p1, LibraryUser p2) {
-                return p1.getLastName().compareToIgnoreCase(p2.getLastName());
-            }
-        }));
+        printer.printUsers(library.getSortedUsers(
+                (p1, p2) -> p1.getLastName().compareToIgnoreCase(p2.getLastName())
+        ));
     }
 
     private void addUser() {
@@ -127,17 +125,18 @@ class LibraryControl {
     private void deleteBook() {
         try {
             Book book = dataReader.readAndCreateBook();
-            if (library.removePublication(book)){
+            if (library.removePublication(book)) {
                 printer.printLine("Usunięto książkę");
-            }
-            else printer.printLine("Brak wskazanej książki");
+            } else printer.printLine("Brak wskazanej książki");
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się usunąć książki, niepoprawne dane");
         }
     }
 
     private void printBooks() {
-        printer.printBooks((library.getSortedPublications(new AlphabeticalTitleComparator())));
+        printer.printBooks(library.getSortedPublications(
+                (p1, p2) -> p1.getTitle().compareToIgnoreCase(p2.getTitle())
+        ));
     }
 
     private void addMagazine() {
@@ -154,17 +153,18 @@ class LibraryControl {
     private void deleteMagazine() {
         try {
             Magazine magazine = dataReader.readAndCreateMagazine();
-            if (library.removePublication(magazine)){
+            if (library.removePublication(magazine)) {
                 printer.printLine("Usunięto magazyn");
-            }
-            else printer.printLine("Brak wskazanego magazynu");
+            } else printer.printLine("Brak wskazanego magazynu");
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się usunąć magazynu, niepoprawne dane");
         }
     }
 
     private void printMagazines() {
-        printer.printMagazines(library.getSortedPublications(new AlphabeticalTitleComparator()));
+        printer.printMagazines(library.getSortedPublications(
+                (p1, p2) -> p1.getTitle().compareToIgnoreCase(p2.getTitle())
+        ));
     }
 
     private void exit() {
@@ -181,7 +181,7 @@ class LibraryControl {
     private enum Option {
         EXIT(0, "Wyjście z programu"),
         ADD_BOOK(1, "Dodanie książki"),
-        ADD_MAGAZINE(2,"Dodanie magazynu/gazety"),
+        ADD_MAGAZINE(2, "Dodanie magazynu/gazety"),
         PRINT_BOOKS(3, "Wyświetlenie dostępnych książek"),
         PRINT_MAGAZINES(4, "Wyświetlenie dostępnych magazynów/gazet"),
         DELETE_BOOK(5, "Usuń książkę"),
@@ -205,7 +205,7 @@ class LibraryControl {
         static Option createFromInt(int option) throws NoSuchOptionException {
             try {
                 return Option.values()[option];
-            } catch(ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new NoSuchOptionException("Brak opcji o id " + option);
             }
         }
