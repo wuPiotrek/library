@@ -1,45 +1,35 @@
 package pl.javastart.library.io;
 
-import pl.javastart.library.model.Book;
-import pl.javastart.library.model.LibraryUser;
-import pl.javastart.library.model.Magazine;
-import pl.javastart.library.model.Publication;
+import pl.javastart.library.model.*;
 
+import javax.sql.rowset.Predicate;
 import java.util.Collection;
 
 public class ConsolePrinter {
     public void printBooks(Collection<Publication> publications) {
-        int counter = 0;
-        for (Publication publication : publications) {
-            if (publication instanceof Book) {
-                printLineAsIs(publication.toString());
-                counter++;
-            }
-        }
-        if (counter == 0)
+        long count = publications.stream()
+                .filter(publication -> publication instanceof Book)
+                .map(Publication::toString)
+                .peek(this::printLineAsIs)
+                .count();
+        if (count == 0)
             printLine("Brak książek w bibliotece");
     }
 
     public void printMagazines(Collection<Publication> publications) {
-        int counter = 0;
-        for (Publication publication : publications) {
-            if (publication instanceof Magazine) {
-                printLineAsIs(publication.toString());
-                counter++;
-            }
-        }
-        if (counter == 0)
+        long count = publications.stream()
+                .filter(publication -> publication instanceof Magazine)
+                .map(Publication::toString)
+                .peek(this::printLineAsIs)
+                .count();
+        if (count == 0)
             printLine("Brak magazynów w bibliotece");
     }
 
     public void printUsers(Collection<LibraryUser> users) {
-        int counter = 0;
-        for (LibraryUser user : users) {
-            printLineAsIs(user.toString());
-            counter++;
-        }
-        if (counter == 0)
-            printLine("Brak użytkowników");
+        users.stream()
+                .map(LibraryUser::toString)
+                .forEach(this::printLineAsIs);
     }
 
     public void printLine(String text) {
