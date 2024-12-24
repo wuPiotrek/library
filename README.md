@@ -24,10 +24,3 @@ Welcome to the **Library Console Application**, a simple and intuitive console-b
   - Input/output (I/O) operations
 
 ---
-
-## 🎯 How to Run the Application
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/wuPiotrek/library.git
-   cd library
