@@ -1,6 +1,6 @@
 # Library Console Application 📚
 
-Welcome to the **Library Console Application**, a simple and intuitive console-based program written in Java Core. This project provides basic functionality for managing users, books, and lending operations, making it an excellent starting point for learning Java and object-oriented programming.
+Welcome to the **Library Console Application**, a simple and intuitive console-based program written in Java. This project provides basic functionality for managing users, books, and lending operations, making it an excellent starting point for learning Java and object-oriented programming.
 
 ---
 
@@ -16,7 +16,7 @@ Welcome to the **Library Console Application**, a simple and intuitive console-b
 
 ## 🛠️ Technologies Used
 
-- **Java Core**:  
+- **Java**:  
   The application leverages fundamental Java concepts like:
   - Object-oriented programming (OOP)
   - Collections framework
