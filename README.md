@@ -16,7 +16,7 @@ Welcome to the **Library Console Application**, a simple and intuitive console-b
 
 - **Data Persistence**:
   - Save and load data using CSV or serialized file formats.
-  - Ensure data consistency and recovery across application sessions.
+  - Ensure data consistency and recovery across application sessions.  
 
 ---
 
